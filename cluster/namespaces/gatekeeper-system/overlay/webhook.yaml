@@ -1,0 +1,12 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: gatekeeper-validating-webhook-configuration
+webhooks:
+  - name: validation.gatekeeper.sh
+    namespaceSelector:
+      matchExpressions:
+        - key: admission.gatekeeper.sh/ignore
+          operator: DoesNotExist
+        - key: control-plane
+          operator: DoesNotExist
